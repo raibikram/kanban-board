@@ -5,7 +5,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 🔗 **[https://kanban-board-six-tau.vercel.app](https://kanban-board-six-tau.vercel.app)**
 
@@ -13,7 +13,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ## ✨ Features
 
-### ✅ Core Functionality
+### Core Functionality
 
 - Add / Edit / Delete **Tasks**
 - Add / Edit / Delete **Columns**
@@ -35,31 +35,31 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 src/
- ├─ components/
- │   ├─ layout/
- │   │   ├─ Footer.tsx
- │   │   ├─ Header.tsx
- │   │   └─ ControlBar.tsx
- │   ├─ ColumnContainer.tsx
- │   ├─ KanbanBoard.tsx
- │   ├─ TaskCard.tsx
- │   └─ TextInputPopup.tsx
- ├─ store/
- │   └─ kanbanStore.ts
- ├─ utils/
- │   ├─ constants.ts
- │   ├─ types.ts
- ├─ App.tsx
- ├─ main.tsx
+├─ components/
+│   ├─ layout/
+│   │   ├─ Footer.tsx
+│   │   └─ Header.tsx
+│   ├─ ControlBar.tsx
+│   ├─ ColumnContainer.tsx
+│   ├─ KanbanBoard.tsx
+│   ├─ TaskCard.tsx
+│   └─ TextInputPopup.tsx
+├─ store/
+│   └─ kanbanStore.ts
+├─ utils/
+│   ├─ constants.ts
+│   ├─ types.ts
+├─ App.tsx
+├─ main.tsx
 ```
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Tool                | Purpose            |
 | ------------------- | ------------------ |
@@ -72,7 +72,7 @@ src/
 
 ---
 
-## ▶️ Installation & Setup
+## Installation & Setup
 
 ### 1) Clone Repository
 
@@ -100,9 +100,9 @@ Now visit:
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
-### 🧠 Zustand Store (`kanbanStore.ts`)
+### Zustand Store (`kanbanStore.ts`)
 
 Manages all application logic:
 
@@ -113,7 +113,7 @@ Manages all application logic:
 - Reorder columns
 - Persist state in `localStorage`
 
-### 🧲 Drag & Drop (dnd-kit)
+### Drag & Drop (dnd-kit)
 
 Used inside:
 
@@ -130,7 +130,7 @@ Allows:
 
 ---
 
-## 🖼 Screenshots
+## Screenshots
 
 ![Kanban Board UI](./public/screenshot.png)
 
