@@ -85,7 +85,7 @@ export default function ColumnContainer({ column }: Props) {
         className="flex items-center justify-between gap-2 px-4"
       >
         <div className="flex-1 flex items-center gap-2 justify-between">
-          {allTasks.length}
+          {tasks.length}
           <span className="font-bold text-lg">{column.title}</span>
           <button
             className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition cursor-pointer"
