@@ -118,7 +118,11 @@ export default function TaskCard({ task }: Props) {
         >
           <Edit2 size={16} />
         </button>
-        <button onClick={() => handleTaskDelete(task.id)}>
+        <button
+          onClick={() => handleTaskDelete(task.id)}
+          className="p-1 hover:bg-red-200 dark:hover:bg-red-700 rounded-md transition cursor-pointer"
+          aria-label="Delete task"
+        >
           <Trash size={16} />
         </button>
       </div>

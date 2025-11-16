@@ -6,7 +6,19 @@ body,
   height: 100%;
 }
 
+body {
+  background: #071021;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
 
-.bg-columnBackground{
-    @apply bg-gray-600
+/* small helper */
+.bg-columnBackground {
+  @apply bg-gray-600;
+}
+.bg-main {
+  @apply bg-[#071021];
 }
