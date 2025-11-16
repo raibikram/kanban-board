@@ -35,7 +35,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 src/
@@ -51,15 +51,15 @@ src/
 ├─ store/
 │   └─ kanbanStore.ts
 ├─ utils/
-│   ├─ constants.ts
-│   ├─ types.ts
+│    ├─ constants.ts
+├─ types.ts
 ├─ App.tsx
 ├─ main.tsx
 ```
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
 | Tool                | Purpose            |
 | ------------------- | ------------------ |
