@@ -5,7 +5,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 🔗 **[https://kanban-board-six-tau.vercel.app](https://kanban-board-six-tau.vercel.app)**
 
@@ -13,7 +13,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ## ✨ Features
 
-### ✅ Core Functionality
+### Core Functionality
 
 - Add / Edit / Delete **Tasks**
 - Add / Edit / Delete **Columns**
@@ -39,22 +39,22 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ```
 src/
- ├─ components/
- │   ├─ layout/
- │   │   ├─ Footer.tsx
- │   │   ├─ Header.tsx
- │   │   └─ ControlBar.tsx
- │   ├─ ColumnContainer.tsx
- │   ├─ KanbanBoard.tsx
- │   ├─ TaskCard.tsx
- │   └─ TextInputPopup.tsx
- ├─ store/
- │   └─ kanbanStore.ts
- ├─ utils/
- │   ├─ constants.ts
- │   ├─ types.ts
- ├─ App.tsx
- ├─ main.tsx
+├─ components/
+│   ├─ layout/
+│   │   ├─ Footer.tsx
+│   │   └─ Header.tsx
+│   ├─ ControlBar.tsx
+│   ├─ ColumnContainer.tsx
+│   ├─ KanbanBoard.tsx
+│   ├─ TaskCard.tsx
+│   └─ TextInputPopup.tsx
+├─ store/
+│   └─ kanbanStore.ts
+├─ utils/
+│   ├─ constants.ts
+│   ├─ types.ts
+├─ App.tsx
+├─ main.tsx
 ```
 
 ---
