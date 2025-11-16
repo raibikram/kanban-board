@@ -11,7 +11,7 @@ interface Props {
   column: Column;
 }
 export default function ColumnContainer({ column }: Props) {
-  const [isEditTitlePopupOpen, setIsEditeColumnTitlePopupOpen] =
+  const [isEditeColumnTitlePopupOpen, setIsEditeColumnTitlePopupOpen] =
     useState(false);
   const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
   const allTasks = useKanbanStore((s) => s.tasks);
@@ -92,7 +92,7 @@ export default function ColumnContainer({ column }: Props) {
       {/* POPUP: edit column title  */}
       <TextInputPopup
         initialValue=""
-        isOpen={isEditTitlePopupOpen}
+        isOpen={isEditeColumnTitlePopupOpen}
         onClose={() => setIsEditeColumnTitlePopupOpen(false)}
         onSave={(title) => handleUpdateColumnTitle(title)}
         title="Edit Column Title"
