@@ -35,7 +35,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -59,7 +59,7 @@ src/
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Tool                | Purpose            |
 | ------------------- | ------------------ |
@@ -72,7 +72,7 @@ src/
 
 ---
 
-## ▶️ Installation & Setup
+## Installation & Setup
 
 ### 1) Clone Repository
 
@@ -100,9 +100,9 @@ Now visit:
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
-### 🧠 Zustand Store (`kanbanStore.ts`)
+### Zustand Store (`kanbanStore.ts`)
 
 Manages all application logic:
 
@@ -113,7 +113,7 @@ Manages all application logic:
 - Reorder columns
 - Persist state in `localStorage`
 
-### 🧲 Drag & Drop (dnd-kit)
+### Drag & Drop (dnd-kit)
 
 Used inside:
 
@@ -130,7 +130,7 @@ Allows:
 
 ---
 
-## 🖼 Screenshots
+## Screenshots
 
 ![Kanban Board UI](./public/screenshot.png)
 
