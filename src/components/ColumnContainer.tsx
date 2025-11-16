@@ -4,7 +4,7 @@ import type { Column, Id } from "../types";
 import { CSS } from "@dnd-kit/utilities";
 import { useKanbanStore } from "../store/kanbanStore";
 import TaskCard from "./TaskCard";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import TextInputPopup from "./TextInputPopup";
 
 interface Props {
@@ -16,7 +16,14 @@ export default function ColumnContainer({ column }: Props) {
   const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
 
   const allTasks = useKanbanStore((s) => s.tasks);
-  const allTaskIds = allTasks.map((t) => t.id);
+  const addTask = useKanbanStore((s) => s.addTask);
+  const updateColumn = useKanbanStore((s) => s.updateColumn);
+  const deleteColumn = useKanbanStore((s) => s.deleteColumn);
+
+  // FILTER STATES
+  const filterText = useKanbanStore((s) => s.filter);
+  const filterColumn = useKanbanStore((s) => s.columnFilter);
+  const filterStatus = useKanbanStore((s) => s.statusFilter);
 
   const {
     attributes,
@@ -31,16 +38,29 @@ export default function ColumnContainer({ column }: Props) {
     transition,
   };
 
+  // FILTERED TASKS
+  const tasks = useMemo(() => {
+    return allTasks
+      .filter((t) => t.columnId === column.id)
+      .filter((t) =>
+        filterText
+          ? t.content.toLowerCase().includes(filterText.toLowerCase())
+          : true
+      )
+      .filter(() => (filterColumn ? column.id === filterColumn : true))
+      .filter((t) =>
+        filterStatus === "completed"
+          ? t.completed === true
+          : filterStatus === "incomplete"
+          ? t.completed === false
+          : true
+      );
+  }, [allTasks, column.id, filterText, filterColumn, filterStatus]);
+  const taskIds = useMemo(() => tasks.map((t) => t.id), [tasks]);
   function handleDeleteColumn(id: Id) {
     if (window.confirm("Are you sure, you want to delete this column?")) {
-      console.log("Delete column", id);
+      deleteColumn(id);
     }
-  }
-  function handleSaveTask(value: string) {
-    console.log("Save new task", value);
-  }
-  function handleUpdateColumnTitle(value: string) {
-    console.log("Update  task", value);
   }
 
   if (isDragging) {
@@ -82,9 +102,9 @@ export default function ColumnContainer({ column }: Props) {
         </button>
       </div>
       {/* TASK  */}
-      <SortableContext items={allTaskIds}>
+      <SortableContext items={taskIds}>
         <div className="flex flex-col gap-3">
-          {allTasks.map((t) => (
+          {tasks.map((t) => (
             <TaskCard key={t.id} task={t} />
           ))}
         </div>
@@ -105,7 +125,7 @@ export default function ColumnContainer({ column }: Props) {
         initialValue=""
         isOpen={isAddTaskPopupOpen}
         onClose={() => setIsAddTaskPopupOpen(false)}
-        onSave={(title) => handleSaveTask(title)}
+        onSave={(title) => addTask(column.id, title)}
         title="Add New Task"
         placeholder="Task title..."
       />
@@ -114,7 +134,7 @@ export default function ColumnContainer({ column }: Props) {
         initialValue={column.title}
         isOpen={isEditeColumnTitlePopupOpen}
         onClose={() => setIsEditeColumnTitlePopupOpen(false)}
-        onSave={(title) => handleUpdateColumnTitle(title)}
+        onSave={(newTitle) => updateColumn(column.id, newTitle)}
         title="Edit Column Title"
         placeholder="Column title..."
       />
