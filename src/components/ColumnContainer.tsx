@@ -14,23 +14,43 @@ export default function ColumnContainer({ column }: Props) {
   const [isEditeColumnTitlePopupOpen, setIsEditeColumnTitlePopupOpen] =
     useState(false);
   const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
+
   const allTasks = useKanbanStore((s) => s.tasks);
   const allTaskIds = allTasks.map((t) => t.id);
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: column.id, data: { type: "Column", column } });
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: column.id, data: { type: "Column", column } });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
   };
 
   function handleDeleteColumn(id: Id) {
-    console.log("Delete column", id);
+    if (window.confirm("Are you sure, you want to delete this column?")) {
+      console.log("Delete column", id);
+    }
   }
   function handleSaveTask(value: string) {
     console.log("Save new task", value);
   }
   function handleUpdateColumnTitle(value: string) {
     console.log("Update  task", value);
+  }
+
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="w-[320px] h-[200px] rounded-lg opacity-30 bg-gray-700"
+      />
+    );
   }
   return (
     <div
@@ -91,7 +111,7 @@ export default function ColumnContainer({ column }: Props) {
       />
       {/* POPUP: edit column title  */}
       <TextInputPopup
-        initialValue=""
+        initialValue={column.title}
         isOpen={isEditeColumnTitlePopupOpen}
         onClose={() => setIsEditeColumnTitlePopupOpen(false)}
         onSave={(title) => handleUpdateColumnTitle(title)}

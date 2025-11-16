@@ -1,14 +1,16 @@
 import { useSortable } from "@dnd-kit/sortable";
-import type { Task } from "../types";
+import type { Id, Task } from "../types";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Edit2, Trash } from "lucide-react";
 import { CSS } from "@dnd-kit/utilities";
+import TextInputPopup from "./TextInputPopup";
 interface Props {
   task: Task;
 }
 export default function TaskCard({ task }: Props) {
   const [hover, setHover] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const {
     attributes,
     listeners,
@@ -28,6 +30,17 @@ export default function TaskCard({ task }: Props) {
       style={style}
       className="opacity-30 bg-gray-700 dark:bg-gray-600 h-[88px] rounded-lg p-3"
     />;
+  }
+  function handleTaskDelete(id: Id) {
+    const confirmDelete = window.confirm(
+      "Are you sure , you want to delete this task?"
+    );
+    if (confirmDelete) {
+      console.log("Delete task", id);
+    }
+  }
+  function handleUpdateTask(id: Id, value: string) {
+    console.log("Update task", id, ":", value);
   }
   return (
     <div
@@ -96,17 +109,25 @@ export default function TaskCard({ task }: Props) {
       </div>
       <div className="flex gap-2 items-center">
         <button
-          onClick={() => {}}
+          onClick={() => setIsPopupOpen(true)}
           className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition cursor-pointer"
           aria-label="Edit task"
         >
           <Edit2 size={16} />
         </button>
-        <button onClick={() => {}}>
+        <button onClick={() => handleTaskDelete(task.id)}>
           <Trash size={16} />
         </button>
       </div>
       {/* EDIT TASK POUP  */}
+      <TextInputPopup
+        title="Edit Task"
+        initialValue={task.content}
+        placeholder="Task content..."
+        onClose={() => setIsPopupOpen(false)}
+        onSave={(value) => handleUpdateTask(task.id, value)}
+        isOpen={isPopupOpen}
+      />
     </div>
   );
 }
