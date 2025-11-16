@@ -98,7 +98,6 @@ export const useKanbanStore = create<KanbanState>()(
 
     {
       name: "kanban-storage",
-      skipHydration: true, // 👈 SUPER IMPORTANT
       partialize: (state) => ({
         columns: state.columns,
         tasks: state.tasks,

@@ -46,24 +46,21 @@ export default function TaskCard({ task }: Props) {
   return (
     <div
       ref={setNodeRef}
-      style={style}
       {...attributes}
       {...listeners}
+      style={style}
+      className="flex justify-between items-center p-2 rounded-lg shadow-md cursor-grab
+             bg-gray-400 dark:bg-gray-800 border border-transparent
+             transition-transform duration-150 ease-in-out hover:scale-[1.02] hover:shadow-lg"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="flex justify-between gap-1 p-2 rounded-lg shadow-md cursor-grab bg-gray-400 dark:bg-gray-800 hover:border-2 hover:border-b-cyan-50"
     >
-      {/* TASK  */}
-      <div className="flex items-center">
-        <motion.div
-          className="overflow-hidden flex items-center"
-          animate={{
-            width: task.completed || hover ? "1.5rem" : "0rem", //0->24px
-          }}
-          transition={{ duration: 0.2 }}
-        >
+      {/* LEFT: Checkbox + Task Content */}
+      <div className="flex items-center gap-2 flex-1">
+        {/* FIXED WIDTH CHECKBOX */}
+        <div className="relative w-6 h-6 flex items-center justify-center">
           <motion.label
-            className="w-6 h-6 flex items-center justify-center cursor-pointer"
+            className="w-6 h-6 flex items-center justify-center cursor-pointer absolute"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: task.completed || hover ? 1 : 0,
@@ -77,18 +74,18 @@ export default function TaskCard({ task }: Props) {
               onChange={() =>
                 updateTask(task.id, task.content, !task.completed)
               }
-              className="absolute opacity-0 w-6 h-6 cursor-pointer"
+              className="absolute opacity-0 w-full h-full cursor-pointer"
             />
             <span
               className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                 task.completed
                   ? "bg-green-500 border-green-500"
-                  : "border-gray-200 border bg-gray-600"
+                  : "border-gray-300 bg-gray-600"
               }`}
             >
               {task.completed && (
                 <svg
-                  className="w-3 h-3 text-black "
+                  className="w-3 h-3 text-black"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={3}
@@ -99,34 +96,37 @@ export default function TaskCard({ task }: Props) {
               )}
             </span>
           </motion.label>
-        </motion.div>
+        </div>
 
-        {/* TASK CONTENT  */}
+        {/* TASK CONTENT */}
         <span
-          className={`ml-2 text-sm md:text-base wrap-break-word transition-all ${
+          className={`text-sm md:text-base wrap-break-word ${
             task.completed ? "text-green-300" : "text-black dark:text-gray-200"
           }`}
         >
           {task.content}
         </span>
       </div>
+
+      {/* RIGHT: Edit/Delete Buttons */}
       <div className="flex gap-2 items-center">
         <button
           onClick={() => setIsPopupOpen(true)}
-          className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition cursor-pointer"
+          className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition"
           aria-label="Edit task"
         >
           <Edit2 size={16} />
         </button>
         <button
           onClick={() => handleTaskDelete(task.id)}
-          className="p-1 hover:bg-red-200 dark:hover:bg-red-700 rounded-md transition cursor-pointer"
+          className="p-1 hover:bg-red-200 dark:hover:bg-red-700 rounded-md transition"
           aria-label="Delete task"
         >
           <Trash size={16} />
         </button>
       </div>
-      {/* EDIT TASK POUP  */}
+
+      {/* EDIT TASK POPUP */}
       <TextInputPopup
         title="Edit Task"
         initialValue={task.content}
