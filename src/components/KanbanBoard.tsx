@@ -42,7 +42,7 @@ export default function KanbanBoard() {
 
       {createPortal(
         <DragOverlay>
-          <ColumnContainer  column={columns}/>
+          <ColumnContainer column={columns} />
         </DragOverlay>,
         document.body
       )}
