@@ -74,7 +74,9 @@ export default function TaskCard({ task }: Props) {
             <input
               type="checkbox"
               checked={task.completed || false}
-              onChange={() => {}}
+              onChange={() =>
+                updateTask(task.id, task.content, !task.completed)
+              }
               className="absolute opacity-0 w-6 h-6 cursor-pointer"
             />
             <span
@@ -126,7 +128,7 @@ export default function TaskCard({ task }: Props) {
         initialValue={task.content}
         placeholder="Task content..."
         onClose={() => setIsPopupOpen(false)}
-        onSave={() => updateTask(task.id, task.content, !task.completed)}
+        onSave={(value) => updateTask(task.id, value)}
         isOpen={isPopupOpen}
       />
     </div>
