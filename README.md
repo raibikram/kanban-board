@@ -1,38 +1,41 @@
 # Kanban Board
 
 A clean, modern **Kanban Board** built with **React + TypeScript**, **Zustand**, **dnd-kit**, and **TailwindCSS**.
-Supports creating, editing, dragging tasks & columns — all persisted locally.
+Supports creating, editing, dragging tasks & columns — all **persisted locally**.
 
 ---
 
-**Live Demo: [click](https://kanban-board-six-tau.vercel.app)**
+## 🚀 Live Demo
+
+🔗 **[https://kanban-board-six-tau.vercel.app](https://kanban-board-six-tau.vercel.app)**
 
 ---
-## Features
 
-### Core Functionality
+## ✨ Features
+
+### ✅ Core Functionality
 
 - Add / Edit / Delete **Tasks**
 - Add / Edit / Delete **Columns**
-- **Drag & Drop** (powered by **dnd-kit**)
+- **Drag & Drop** using **dnd-kit**:
 
   - Move tasks within a column
-  - Move tasks between columns
+  - Move tasks across columns
   - Reorder columns
 
-- Clean UI with **TailwindCSS**
-- Board state **persists in localStorage** (Zustand Persist)
-- Fully responsive
+- Clean, minimal UI using **TailwindCSS**
+- State **automatically saved** using Zustand Persist
+- Fully responsive layout
 
-### Extra UI Features
+### 🎨 Extra UI Enhancements
 
-- Popup modal for entering text
-- Dedicated layout components (Header, Footer, ControlBar)
-- Smooth interactions
+- TextInput popup modal
+- Separate layout components (Header, Footer, ControlBar)
+- Smooth hover & drag interactions
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 src/
@@ -52,101 +55,87 @@ src/
  │   ├─ types.ts
  ├─ App.tsx
  ├─ main.tsx
-
 ```
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-| Tool                   | Purpose                  |
-| ---------------------- | ------------------------ |
-| **React + TypeScript** | UI + Types               |
-| **Zustand**            | Global state management  |
-| **Zustand Persist**    | LocalStorage persistence |
-| **dnd-kit**            | Drag and drop            |
-| **Tailwind CSS**       | Styling                  |
-| **Vite**               | Development & build tool |
+| Tool                | Purpose            |
+| ------------------- | ------------------ |
+| **React + TS**      | UI + Types         |
+| **Zustand**         | Global state       |
+| **Zustand Persist** | LocalStorage save  |
+| **dnd-kit**         | Drag & Drop engine |
+| **Tailwind CSS**    | Styling            |
+| **Vite**            | Build tool         |
 
 ---
 
-## Installation & Setup
+## ▶️ Installation & Setup
 
-### 1️⃣ Clone the Repository
+### 1) Clone Repository
 
 ```bash
 git clone https://github.com/raibikram/kanban-board.git
 cd kanban-board
 ```
 
-### 2️⃣ Install Dependencies
+### 2) Install Dependencies
 
 ```bash
-
-
 pnpm install
-
 ```
 
-### 3️⃣ Run the Dev Server
+_(You may also use `npm install` or `yarn`)_
+
+### 3) Start Development Server
 
 ```bash
-npm dev
+pnpm dev
 ```
 
-Now open:
--> [http://localhost:5173](http://localhost:5173)
+Now visit:
+👉 **[http://localhost:5173](http://localhost:5173)**
 
 ---
 
-## How It Works
+## ⚙️ How It Works
 
-### Zustand Store (`kanbanStore.ts`)
+### 🧠 Zustand Store (`kanbanStore.ts`)
 
-- Keeps all **columns** and **tasks**
-- Handles:
+Manages all application logic:
 
-  - Adding / editing / removing tasks
-  - Adding / editing / removing columns
-  - Dragging logic
+- Columns & tasks
+- Add / Edit / Remove
+- Reorder tasks
+- Move tasks between columns
+- Reorder columns
+- Persist state in `localStorage`
 
-- State is persisted automatically using: persist
+### 🧲 Drag & Drop (dnd-kit)
 
-### dnd-kit Integration
-
-Used in:
+Used inside:
 
 - `KanbanBoard.tsx`
 - `ColumnContainer.tsx`
 - `TaskCard.tsx`
 
-Supports:
+Allows:
 
-- Sorting tasks
-- Moving tasks between columns
-- Sorting columns
+- Task sorting
+- Column sorting
+- Column-to-column moving
+- Smooth DragOverlay previews
 
 ---
 
-## Screenshots
+## 🖼 Screenshots
 
 ![Kanban Board UI](./public/screenshot.png)
 
----
+## 👨‍💻 Author
 
-## Possible Future Improvements
-
-- Dark mode
-- Cloud sync (Supabase / Firebase)
-- Tags, priorities, deadlines
-- Search & filters
-- Framer Motion animations
-
----
-
-## Contact
-
-- **Name:** Bikram Rai
-- **Portfolio:** [www.bikram-rai.com.np](https://bikram-rai.com.np)
-- **Email:** raibikraminfo@gmail.com
-- **LinkedIn:** [raibikraminfo](https://www.linkedin.com/in/raibikraminfo)
+**Bikram Rai**  
+Portfolio: https://bikram-rai.com.np  
+Email: raibikraminfo@gmail.com
