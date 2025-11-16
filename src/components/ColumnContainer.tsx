@@ -76,51 +76,74 @@ export default function ColumnContainer({ column }: Props) {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-[320px] bg-columnBackground rounded-lg flex flex-col p-3 gap-3  cursor-grab"
+      className="
+    bg-columnBackground rounded-lg flex flex-col 
+    p-3 gap-3 cursor-grab shadow-md
+    w-full sm:w-[300px] md:w-[320px] lg:w-[340px]
+    shrink-0
+  "
     >
-      {/* header  */}
+      {/* HEADER */}
       <div
         {...attributes}
         {...listeners}
-        className="flex items-center justify-between gap-2 px-4"
+        className="flex items-center justify-between"
       >
-        <div className="flex-1 flex items-center gap-2 justify-between">
-          {tasks.length}
+        <span className="text-sm opacity-70">({tasks.length})</span>
+        <div className="flex items-center gap-2">
           <span className="font-bold text-lg">{column.title}</span>
+        </div>
+
+        <div className="flex items-center gap-1">
           <button
-            className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition cursor-pointer"
+            className="p-1 hover:bg-gray-300 dark:hover:bg-gray-700 rounded transition"
             onClick={() => setIsEditeColumnTitlePopupOpen(true)}
           >
-            <Edit2 size={15} />
+            <Edit2 size={14} />
+          </button>
+
+          <button
+            className="p-1 hover:bg-red-300 dark:hover:bg-red-700 rounded transition"
+            onClick={() => handleDeleteColumn(column.id)}
+          >
+            <Trash size={14} />
           </button>
         </div>
-        <button
-          className="p-1 hover:bg-red-200 dark:hover:bg-red-700 rounded-md transition cursor-pointer"
-          onClick={() => handleDeleteColumn(column.id)}
-        >
-          <Trash size={17} />
-        </button>
       </div>
-      {/* TASK  */}
+
+      {/* TASKS */}
       <SortableContext items={taskIds}>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           {tasks.map((t) => (
             <TaskCard key={t.id} task={t} />
           ))}
         </div>
       </SortableContext>
 
-      {/* ADD TASK BUTTON  */}
-      <div className="flex items-center justify-center">
-        <button
-          className="flex items-center gap-2 mt-2 text-md text-white hover:text-rose-500 cursor-pointer"
-          onClick={() => setIsAddTaskPopupOpen(true)}
-        >
-          <PlusCircle size={16} />
-          Add task
-        </button>
-      </div>
-      {/* POPUP : ADD TASK */}
+      {/* ADD TASK */}
+
+  <button
+    onClick={() => setIsAddTaskPopupOpen(true)}
+    className="
+      inline-flex items-center gap-1
+      px-6 py-1.5
+      bg-green-500 text-white
+      rounded
+      hover:bg-green-600
+      text-md
+      transition-colors
+    "
+  >
+    <PlusCircle size={14} />
+    Add
+  </button>
+
+
+
+
+
+
+      {/* POPUPS */}
       <TextInputPopup
         initialValue=""
         isOpen={isAddTaskPopupOpen}
@@ -129,7 +152,7 @@ export default function ColumnContainer({ column }: Props) {
         title="Add New Task"
         placeholder="Task title..."
       />
-      {/* POPUP: edit column title  */}
+
       <TextInputPopup
         initialValue={column.title}
         isOpen={isEditeColumnTitlePopupOpen}

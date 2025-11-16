@@ -16,27 +16,15 @@ import { useKanbanStore } from "../store/kanbanStore";
 import type { Column, Task, Id } from "../types";
 import TaskCardNew from "./TaskCard";
 export default function KanbanBoard() {
-  const [showAllColumn, setShowAllColumn] = useState(true);
   const columns = useKanbanStore((s) => s.columns);
   const tasks = useKanbanStore((s) => s.tasks);
-  // const addColumn = useKanbanStore((s) => s.addColumn);
   const moveTaskToColumn = useKanbanStore((s) => s.moveTaskToColumn);
   const reorderTasks = useKanbanStore((s) => s.reorderTasks);
   const reorderColumns = useKanbanStore((s) => s.reorderColumns);
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [tasksLocal, setTasksLocal] = useState<Task[]>(tasks);
-  const filterText = useKanbanStore((s) => s.filter);
-  const filterColumn = useKanbanStore((s) => s.columnFilter);
-  const filterStatus = useKanbanStore((s) => s.statusFilter);
-  useEffect(() => {
-    // console.log("Filter text:", filterText);
-    // console.log("Filter column:", filterColumn);
-    // console.log("Filter status:", filterStatus);
-    if (filterText || filterColumn || filterStatus) {
-      setShowAllColumn(false);
-    }
-  }, [filterText, filterColumn, filterStatus]);
+
   // Sync local task state with store
   useEffect(() => {
     setTasksLocal(tasks);
@@ -138,32 +126,70 @@ export default function KanbanBoard() {
   const columnIds = columns.map((c) => c.id);
 
   return (
-    <DndContext
-      sensors={sensors}
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-    >
-      <div className="flex min-h-screen gap-4 p-6 flex-wrap overflow-x-auto items-start sm:justify-center opacity-90 ">
-        <SortableContext items={columnIds}>
-          {showAllColumn
-            ? columns.map((col) => (
-                <ColumnContainer key={col.id} column={col} />
-              ))
-            : columns.map((col) => (
-                <ColumnContainer key={col.id} column={col} />
-              ))}
-        </SortableContext>
-      </div>
 
-      {/* Drag overlay for smooth dragging */}
-      {createPortal(
-        <DragOverlay>
-          {activeTask && <TaskCardNew task={activeTask} />}
-          {activeColumn && <ColumnContainer column={activeColumn} />}
-        </DragOverlay>,
-        document.body
-      )}
-    </DndContext>
+        <DndContext
+  sensors={sensors}
+  onDragStart={handleDragStart}
+  onDragOver={handleDragOver}
+  onDragEnd={handleDragEnd}
+>
+  {/* Columns container */}
+  <div
+    className="
+      flex flex-wrap gap-4 p-4 sm:p-6
+      items-start justify-center md:justify-center
+      w-full 
+    "
+  >
+    <SortableContext items={columnIds} >
+      {columns.map((col) => (
+        <div
+          key={col.id}
+          className="
+            w-full sm:w-[300px] md:w-[320px] lg:w-[340px] 
+            shrink-0
+          "
+        >
+          <ColumnContainer column={col} />
+        </div>
+      ))}
+    </SortableContext>
+  </div>
+
+  {/* Drag overlay */}
+  {createPortal(
+    <DragOverlay>
+      {activeTask && <TaskCardNew task={activeTask} />}
+      {activeColumn && <ColumnContainer column={activeColumn} />}
+    </DragOverlay>,
+    document.body
+  )}
+</DndContext>
+    // <DndContext
+    //   sensors={sensors}
+    //   onDragStart={handleDragStart}
+    //   onDragOver={handleDragOver}
+    //   onDragEnd={handleDragEnd}
+    // >
+    //   <div className="flex min-h-screen gap-4 p-6 flex-wrap overflow-x-auto items-start sm:justify-center opacity-90 ">
+    //     <SortableContext items={columnIds}>
+    //       {columns.map((col) => (
+    //         <ColumnContainer key={col.id} column={col} />
+    //       ))}
+    //     </SortableContext>
+    //   </div>
+
+    //   {/* Drag overlay for smooth dragging */}
+    //   {createPortal(
+    //     <DragOverlay>
+    //       {activeTask && <TaskCardNew task={activeTask} />}
+    //       {activeColumn && <ColumnContainer column={activeColumn} />}
+    //     </DragOverlay>,
+    //     document.body
+    //   )}
+    // </DndContext>
+
+
+
   );
 }

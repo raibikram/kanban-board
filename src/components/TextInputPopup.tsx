@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface TextInputPopupProps {
   isOpen: boolean;
@@ -8,6 +8,7 @@ interface TextInputPopupProps {
   onClose: () => void;
   onSave: (value: string) => void;
 }
+
 export default function TextInputPopup({
   initialValue,
   isOpen,
@@ -17,17 +18,25 @@ export default function TextInputPopup({
   placeholder,
 }: TextInputPopupProps) {
   const [value, setValue] = useState(initialValue);
+
+  // Reset value when popup opens
+  useEffect(() => {
+    if (isOpen) setValue(initialValue);
+  }, [isOpen, initialValue]);
+
   function handleSave() {
-    if(!value.trim()) return;
-    onSave(value)
-    setValue("")
+    if (!value.trim()) return;
+    onSave(value);
+    setValue("");
     onClose();
   }
+
   if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-80 shadow-lg flex flex-col gap-4">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col gap-4 w-full sm:w-[300px] md:w-80 p-4 sm:p-6">
+        <h2 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
           {title}
         </h2>
         <input
@@ -35,15 +44,15 @@ export default function TextInputPopup({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
-          className="px-3 py-2 rounded border bg-gray-100 dark:bg-gray-700 text-black dark:text-white focus:outline-none w-full"
+          className="w-full px-3 py-2 rounded border bg-gray-100 dark:bg-gray-700 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-400 transition"
           onKeyDown={(e) => e.key === "Enter" && handleSave()}
         />
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-2 flex-wrap">
           <button
             className="px-3 py-1 bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 transition cursor-pointer"
             onClick={onClose}
           >
-            Cancle
+            Cancel
           </button>
           <button
             className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer"
