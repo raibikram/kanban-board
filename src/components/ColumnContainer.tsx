@@ -76,7 +76,7 @@ export default function ColumnContainer({ column }: Props) {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-[320px] bg-columnBackground rounded-lg flex flex-col p-3 gap-3"
+      className="w-[320px] bg-columnBackground rounded-lg flex flex-col p-3 gap-3  cursor-grab"
     >
       {/* header  */}
       <div
@@ -95,7 +95,7 @@ export default function ColumnContainer({ column }: Props) {
           </button>
         </div>
         <button
-          className="rounded ml-2 cursor-pointer"
+          className="p-1 hover:bg-red-200 dark:hover:bg-red-700 rounded-md transition cursor-pointer"
           onClick={() => handleDeleteColumn(column.id)}
         >
           <Trash size={17} />
@@ -113,7 +113,7 @@ export default function ColumnContainer({ column }: Props) {
       {/* ADD TASK BUTTON  */}
       <div className="flex items-center justify-center">
         <button
-          className="flex items-center gap-2 mt-2 text-md text-white hover:text-blue-800"
+          className="flex items-center gap-2 mt-2 text-md text-white hover:text-rose-500 cursor-pointer"
           onClick={() => setIsAddTaskPopupOpen(true)}
         >
           <PlusCircle size={16} />
