@@ -5,12 +5,15 @@ import { useState } from "react";
 import { Edit2, Trash } from "lucide-react";
 import { CSS } from "@dnd-kit/utilities";
 import TextInputPopup from "./TextInputPopup";
+import { useKanbanStore } from "../store/kanbanStore";
 interface Props {
   task: Task;
 }
 export default function TaskCard({ task }: Props) {
   const [hover, setHover] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const deleteTask = useKanbanStore((s) => s.deleteTask);
+  const updateTask = useKanbanStore((s) => s.updateTask);
   const {
     attributes,
     listeners,
@@ -36,12 +39,10 @@ export default function TaskCard({ task }: Props) {
       "Are you sure , you want to delete this task?"
     );
     if (confirmDelete) {
-      console.log("Delete task", id);
+      deleteTask(id);
     }
   }
-  function handleUpdateTask(id: Id, value: string) {
-    console.log("Update task", id, ":", value);
-  }
+
   return (
     <div
       ref={setNodeRef}
@@ -125,7 +126,7 @@ export default function TaskCard({ task }: Props) {
         initialValue={task.content}
         placeholder="Task content..."
         onClose={() => setIsPopupOpen(false)}
-        onSave={(value) => handleUpdateTask(task.id, value)}
+        onSave={() => updateTask(task.id, task.content, !task.completed)}
         isOpen={isPopupOpen}
       />
     </div>
