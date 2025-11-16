@@ -59,14 +59,8 @@ export default function ColumnContainer({ column }: Props) {
   const taskIds = useMemo(() => tasks.map((t) => t.id), [tasks]);
   function handleDeleteColumn(id: Id) {
     if (window.confirm("Are you sure, you want to delete this column?")) {
-      console.log("Delete column", id);
+      deleteColumn(id);
     }
-  }
-  function handleSaveTask(value: string) {
-    console.log("Save new task", value);
-  }
-  function handleUpdateColumnTitle(value: string) {
-    console.log("Update  task", value);
   }
 
   if (isDragging) {
@@ -131,7 +125,7 @@ export default function ColumnContainer({ column }: Props) {
         initialValue=""
         isOpen={isAddTaskPopupOpen}
         onClose={() => setIsAddTaskPopupOpen(false)}
-        onSave={(title) => handleSaveTask(title)}
+        onSave={(title) => addTask(column.id, title)}
         title="Add New Task"
         placeholder="Task title..."
       />
@@ -140,7 +134,7 @@ export default function ColumnContainer({ column }: Props) {
         initialValue={column.title}
         isOpen={isEditeColumnTitlePopupOpen}
         onClose={() => setIsEditeColumnTitlePopupOpen(false)}
-        onSave={(title) => handleUpdateColumnTitle(title)}
+        onSave={(newTitle) => updateColumn(column.id, newTitle)}
         title="Edit Column Title"
         placeholder="Column title..."
       />
