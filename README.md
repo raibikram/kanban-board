@@ -30,7 +30,7 @@ Supports creating, editing, dragging tasks & columns — all **persisted locally
 ### 🎨 Extra UI Enhancements
 
 - TextInput popup modal
-- Separate layout components (Header, Footer, ControlBar)
+- Separate layout components (Header, Footer)
 - Smooth hover & drag interactions
 
 ---
