@@ -126,70 +126,43 @@ export default function KanbanBoard() {
   const columnIds = columns.map((c) => c.id);
 
   return (
-
-        <DndContext
-  sensors={sensors}
-  onDragStart={handleDragStart}
-  onDragOver={handleDragOver}
-  onDragEnd={handleDragEnd}
->
-  {/* Columns container */}
-  <div
-    className="
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
+      {/* Columns container */}
+      <div
+        className="
       flex flex-wrap gap-4 p-4 sm:p-6
       items-start justify-center md:justify-center
       w-full 
     "
-  >
-    <SortableContext items={columnIds} >
-      {columns.map((col) => (
-        <div
-          key={col.id}
-          className="
+      >
+        <SortableContext items={columnIds}>
+          {columns.map((col) => (
+            <div
+              key={col.id}
+              className="
             w-full sm:w-[300px] md:w-[320px] lg:w-[340px] 
             shrink-0
           "
-        >
-          <ColumnContainer column={col} />
-        </div>
-      ))}
-    </SortableContext>
-  </div>
+            >
+              <ColumnContainer column={col} />
+            </div>
+          ))}
+        </SortableContext>
+      </div>
 
-  {/* Drag overlay */}
-  {createPortal(
-    <DragOverlay>
-      {activeTask && <TaskCardNew task={activeTask} />}
-      {activeColumn && <ColumnContainer column={activeColumn} />}
-    </DragOverlay>,
-    document.body
-  )}
-</DndContext>
-    // <DndContext
-    //   sensors={sensors}
-    //   onDragStart={handleDragStart}
-    //   onDragOver={handleDragOver}
-    //   onDragEnd={handleDragEnd}
-    // >
-    //   <div className="flex min-h-screen gap-4 p-6 flex-wrap overflow-x-auto items-start sm:justify-center opacity-90 ">
-    //     <SortableContext items={columnIds}>
-    //       {columns.map((col) => (
-    //         <ColumnContainer key={col.id} column={col} />
-    //       ))}
-    //     </SortableContext>
-    //   </div>
-
-    //   {/* Drag overlay for smooth dragging */}
-    //   {createPortal(
-    //     <DragOverlay>
-    //       {activeTask && <TaskCardNew task={activeTask} />}
-    //       {activeColumn && <ColumnContainer column={activeColumn} />}
-    //     </DragOverlay>,
-    //     document.body
-    //   )}
-    // </DndContext>
-
-
-
+      {/* Drag overlay */}
+      {createPortal(
+        <DragOverlay>
+          {activeTask && <TaskCardNew task={activeTask} />}
+          {activeColumn && <ColumnContainer column={activeColumn} />}
+        </DragOverlay>,
+        document.body
+      )}
+    </DndContext>
   );
 }
