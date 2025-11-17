@@ -55,9 +55,8 @@ export default function TaskCard({ task }: Props) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* LEFT: Checkbox + Task Content */}
+      {/* LEFT: Checkbox */}
       <div className="flex items-center gap-2 flex-1">
-        {/* FIXED WIDTH CHECKBOX */}
         <div className="relative w-6 h-6 flex items-center justify-center">
           <motion.label
             className="w-6 h-6 flex items-center justify-center cursor-pointer absolute"

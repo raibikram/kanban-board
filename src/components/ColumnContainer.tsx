@@ -122,9 +122,9 @@ export default function ColumnContainer({ column }: Props) {
 
       {/* ADD TASK */}
 
-  <button
-    onClick={() => setIsAddTaskPopupOpen(true)}
-    className="
+      <button
+        onClick={() => setIsAddTaskPopupOpen(true)}
+        className="
       inline-flex items-center gap-1
       px-6 py-1.5
       bg-green-500 text-white
@@ -133,15 +133,10 @@ export default function ColumnContainer({ column }: Props) {
       text-md
       transition-colors
     "
-  >
-    <PlusCircle size={14} />
-    Add
-  </button>
-
-
-
-
-
+      >
+        <PlusCircle size={14} />
+        Add
+      </button>
 
       {/* POPUPS */}
       <TextInputPopup

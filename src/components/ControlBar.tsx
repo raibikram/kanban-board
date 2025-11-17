@@ -10,7 +10,7 @@ export default function ControlBar() {
   const setStatusFilter = useKanbanStore((s) => s.setStatusFilter);
   const addColumn = useKanbanStore((s) => s.addColumn);
   const columnFilter = useKanbanStore((s) => s.columnFilter);
-   const setColumnFilter = useKanbanStore((s) => s.setColumnFilter);
+  const setColumnFilter = useKanbanStore((s) => s.setColumnFilter);
   const columns = useKanbanStore((s) => s.columns);
 
   return (
@@ -23,7 +23,7 @@ export default function ControlBar() {
         onChange={(e) => setFilter(e.target.value)}
         className="border border-gray-300 dark:hover:border-gray-600 bg-white  dark:bg-gray-800 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-rose-400 outline-none"
       />
-          {/* Column Filter */}
+      {/* Column Filter */}
       <select
         value={columnFilter}
         onChange={(e) => setColumnFilter(e.target.value)}
